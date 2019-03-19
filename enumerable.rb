@@ -58,4 +58,28 @@ module Enumerable
       return false
     end
   end
-end
+
+  def my_count
+    count = 0
+    for item in self
+      count +=1
+    end
+    return count
+  end
+
+  def my_map
+    array = []
+    for item in self
+      array.push(yield(item))
+    end
+    return array if block_given?
+  end
+
+  def my_inject
+    for item in self
+      result = yield(result, item)
+    end
+    return result
+  end
+
+end # module ends
