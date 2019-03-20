@@ -9,7 +9,7 @@ module Enumerable
 
   def my_each_with_index
     count = 0
-    for item in self
+    self.my_each do |item|
       yield(item, count)
       count += 1
     end
@@ -53,6 +53,7 @@ module Enumerable
     self.my_each do
       count += 1
     end
+    count
   end
 
   def my_map(&proc)
