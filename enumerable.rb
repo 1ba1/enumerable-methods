@@ -29,11 +29,8 @@ module Enumerable
     for item in self
       count += 1 if yield(item) == true
     end
-    if count == self.length
-      return true
-    else
-      return false
-    end
+    return true if count == self.length
+    return false
   end
 
   def my_any?
@@ -41,11 +38,8 @@ module Enumerable
     for item in self
       count += 1 if yield(item) == true
     end
-    if count > 0
-      return true
-    else
-      return false
-    end
+    return true if count > 0
+    return false
   end
 
   def my_none?
@@ -53,11 +47,8 @@ module Enumerable
     for item in self
       count += 1 if yield(item) == true
     end
-    if count == 0
-      return true
-    else
-      return false
-    end
+    return true if count.zero?
+    return false
   end
 
   def my_count
@@ -83,7 +74,6 @@ module Enumerable
     else
       i = 0
     end
-
     result = acc
     while i < self.length
       result = yield(result, self[i])
@@ -91,7 +81,6 @@ module Enumerable
     end
     return result if block_given?
   end
-
 end
 
 # module ends
@@ -99,4 +88,3 @@ end
 def multiply_els(arr)
   arr.my_inject { |a, b| a * b }
 end
-
