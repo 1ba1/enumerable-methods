@@ -67,19 +67,33 @@ module Enumerable
     return count
   end
 
-  def my_map
-    array = []
-    for item in self
-      array.push(yield(item))
-    end
-    return array if block_given?
+  def my_map(&proc)
+    result = []
+		if block_given?
+			self.my_each{|item| result << proc.call(item)}
+			return result
+		end
   end
 
-  def my_inject
-    for item in self
-      result = yield(result, item)
+  def my_inject(acc = nil)
+    if acc.nil?
+      acc = self[0]
+      i = 1
+    else
+      i = 0
     end
-    return result
+    
+    result = acc
+    while i < self.length
+      result = yield(result, self[i])
+      i += 1
+    end
+    return result if block_given?
   end
 
 end # module ends
+
+def multiply_els(arr)
+  arr.my_inject { |a,b| a * b}
+end
+
