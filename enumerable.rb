@@ -93,7 +93,9 @@ module Enumerable
     return result if block_given?
   end
 
-end # module ends
+end
+
+# module ends
 
 def multiply_els(arr)
   arr.my_inject { |a,b| a * b}
