@@ -1,5 +1,4 @@
 # module Enumerable
-
 module Enumerable
   def my_each
     for item in self
@@ -100,3 +99,4 @@ end
 def multiply_els(arr)
   arr.my_inject { |a,b| a * b}
 end
+
