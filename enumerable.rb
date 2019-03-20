@@ -29,9 +29,7 @@ module Enumerable
     for item in self
       count += 1 if yield(item) == true
     end
-    return true if count == self.length
-
-    return false
+    count == self.length
   end
 
   def my_any?
@@ -52,7 +50,7 @@ module Enumerable
 
   def my_count
     count = 0
-    for item in self
+    self.my_each do
       count += 1
     end
   end
@@ -60,7 +58,7 @@ module Enumerable
   def my_map(&proc)
     result = []
     if block_given?
-      self.my_each{|item| result << proc.call(item)}
+      self.my_each{ |item| result << proc.call(item) }
       return result
     end
   end
