@@ -1,3 +1,5 @@
+# module Enumerable
+
 module Enumerable
   def my_each
 		for item in self
@@ -82,7 +84,7 @@ module Enumerable
     else
       i = 0
     end
-    
+
     result = acc
     while i < self.length
       result = yield(result, self[i])
@@ -96,4 +98,3 @@ end # module ends
 def multiply_els(arr)
   arr.my_inject { |a,b| a * b}
 end
-
