@@ -2,19 +2,19 @@
 
 module Enumerable
   def my_each
-		for item in self
-			yield(item)
-		end
-		return self if block_given?
-	end
+    for item in self
+	    yield(item)
+    end
+    return self if block_given?
+  end
 
   def my_each_with_index
     count = 0
-		for item in self
-			yield(item, count)
+	  for item in self
+	    yield(item, count)
       count += 1
-		end
-		return self if block_given?
+	  end
+	  return self if block_given?
 	end
 
   def my_select
