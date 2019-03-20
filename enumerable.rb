@@ -2,7 +2,7 @@
 module Enumerable
   def my_each
     for item in self
-    	yield(item)
+      yield(item)
     end
     return self if block_given?
   end
@@ -30,6 +30,7 @@ module Enumerable
       count += 1 if yield(item) == true
     end
     return true if count == self.length
+
     return false
   end
 
@@ -39,7 +40,6 @@ module Enumerable
       count += 1 if yield(item) == true
     end
     return true if count > 0
-    return false
   end
 
   def my_none?
@@ -48,7 +48,6 @@ module Enumerable
       count += 1 if yield(item) == true
     end
     return true if count.zero?
-    return false
   end
 
   def my_count
@@ -56,7 +55,6 @@ module Enumerable
     for item in self
       count += 1
     end
-    return count
   end
 
   def my_map(&proc)
