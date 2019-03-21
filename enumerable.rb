@@ -18,7 +18,7 @@ module Enumerable
 
   def my_select
     array = []
-    for item in self
+    self.my_each do |item|
       array.push(item) if yield(item) == true
     end
     return array if block_given?
@@ -26,7 +26,7 @@ module Enumerable
 
   def my_all?
     count = 0
-    for item in self
+    self.my_each do |item|
       count += 1 if yield(item) == true
     end
     count == self.length
@@ -34,18 +34,20 @@ module Enumerable
 
   def my_any?
     count = 0
-    for item in self
-      count += 1 if yield(item) == true
+    self.my_each do |item|
+      item = block_given? ? yield(item) : item
+      count += 1 unless item == false || item. nil? || item.zero?
     end
-    return true if count > 0
+    count > 0
   end
 
   def my_none?
     count = 0
-    for item in self
-      count += 1 if yield(item) == true
+    self.my_each do |item|
+      item = block_given? ? yield(item) : item
+      count += 1 if item
     end
-    return true if count.zero?
+    count.zero?
   end
 
   def my_count
@@ -58,10 +60,8 @@ module Enumerable
 
   def my_map(&proc)
     result = []
-    if block_given?
-      self.my_each{ |item| result << proc.call(item) }
-      return result
-    end
+    self.my_each { |item| result << proc.call(item) } if block_given?
+    result
   end
 
   def my_inject(acc = nil)
@@ -76,7 +76,7 @@ module Enumerable
       result = yield(result, self[i])
       i += 1
     end
-    return result if block_given?
+    result if block_given?
   end
 end
 
