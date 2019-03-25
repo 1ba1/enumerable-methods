@@ -35,8 +35,11 @@ module Enumerable
   def my_any?
     count = 0
     self.my_each do |item|
-      item = block_given? ? yield(item) : item
-      count += 1 unless item == false || item. nil? || item.zero?
+      if block_given?
+        count += 1 if yield(item) == true unless item.nil?
+      else
+        count += 1 if item == true
+      end
     end
     count > 0
   end
