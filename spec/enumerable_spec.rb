@@ -2,27 +2,33 @@
 require './enumerable'
 
 RSpec.describe Enumerable do
-  it 'iterates through an array' do
-    expect([1, 2, 3].my_each { |e| e }).to eql([1, 2, 3])
-  end
+  let(:a) { [1, 2, 3, 4, 5] }
 
-  it 'iterates through an array with index' do
-    expect([1, 2, 3].my_each_with_index { |v, i| i }).to eql([0, 1, 2])
-  end
-
-  it 'creates a new array with the elements which meet the block condition' do
-    expect([2, 5, 7].my_select { |e| e > 3 }).to eql([5, 7])
+  it 'returns true if all the elements meet the condition' do
+    expect(a.my_all? { |e| e > 3 }).to be false
   end
 
   it 'returns true if none of the elements meet the block condition' do
-    expect([2, 5, 7].my_none? { |e| e == 0 }).to eql(true)
+    expect(a.my_none? { |e| e == 0 }).to be true
+  end
+
+  it 'reduces the elements according to the block condition' do
+    expect(a.my_inject { |acc, e| acc + e }).to eql(15)
+  end
+
+  it 'returns the product of the elements' do
+    expect(multiply_els(a)).to eql(120)
+  end
+
+  it 'creates a new array with the elements which meet the block condition' do
+    expect(a.my_select { |e| e > 3 }).to eql([4, 5])
   end
 
   it 'returns the number of elements inside the array' do
-    expect([2, 5, 7].my_count).to eql(3)
+    expect(a.my_count).to eql(5)
   end
 
   it 'creates a new array with new elements according to the block condition' do
-    expect([2, 5, 7].my_map { |e| e + 2 }).to eql([4, 7, 9])
+    expect(a.my_map { |e| e + 2 }).to eql([3, 4, 5, 6, 7])
   end
 end
